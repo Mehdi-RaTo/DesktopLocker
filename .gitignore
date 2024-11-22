@@ -1,0 +1,7 @@
+*.exe
+*.obj
+*.dll
+*.res
+*.log
+*.vbw
+*.tmp
