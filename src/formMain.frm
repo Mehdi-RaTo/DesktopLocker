@@ -25,7 +25,6 @@ Begin VB.Form formMain
    ScaleWidth      =   5925
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   WindowState     =   2  'Maximized
    Begin VB.Timer timer 
       Interval        =   1000
       Left            =   120
@@ -235,14 +234,22 @@ Attribute VB_Exposed = False
 Option Explicit
 
 ' Windows API Functions
-Private Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal X As Long, ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
+Private Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
+Private Declare Function EnumDisplayMonitors Lib "user32" (ByVal hdc As Long, ByVal lprcClip As Long, ByVal lpfnEnum As Long, ByVal dwData As Long) As Long
+Private Declare Function GetSystemMetrics Lib "user32" (ByVal nIndex As Long) As Long
 
 ' Define Constants
+Private Const REG_KEY As String = "Software\Microsoft\Windows\CurrentVersion\Run"
+Private Const APP_NAME As String = "DesktopLocker"
+
 Const HWND_TOPMOST = -1
 Const SWP_NOSIZE = &H1
 Const SWP_NOMOVE = &H2
-Private Const REG_KEY As String = "Software\Microsoft\Windows\CurrentVersion\Run"
-Private Const APP_NAME As String = "DesktopLocker"
+
+Const SM_XVIRTUALSCREEN = 76
+Const SM_YVIRTUALSCREEN = 77
+Const SM_CXVIRTUALSCREEN = 78
+Const SM_CYVIRTUALSCREEN = 79
 
 ' Global Variables
 Dim currentPassword As String
@@ -263,6 +270,17 @@ Private Sub VisiblePanel(panelId As Integer)
         frameEnterPanel.Enabled = True
         frameEnterPanel.Visible = True
     End If
+End Sub
+
+Private Sub SetFullScreenAcrossMonitors()
+    Dim x As Long, y As Long, width As Long, height As Long
+    
+    x = GetSystemMetrics(SM_XVIRTUALSCREEN)
+    y = GetSystemMetrics(SM_YVIRTUALSCREEN)
+    width = GetSystemMetrics(SM_CXVIRTUALSCREEN)
+    height = GetSystemMetrics(SM_CYVIRTUALSCREEN)
+    
+    Me.Move x, y, width * Screen.TwipsPerPixelX, height * Screen.TwipsPerPixelY
 End Sub
 
 Private Sub AddToStartup()
@@ -345,6 +363,8 @@ End Sub
 Private Sub Form_Load()
     On Error Resume Next
     
+    Call SetFullScreenAcrossMonitors
+    
     Dim fileContent As String
     Dim arrFileContent() As String
     
@@ -376,8 +396,9 @@ End Sub
 
 Private Sub timer_Timer()
     On Error Resume Next
+    Call SetFullScreenAcrossMonitors
     Call SetWindowPos(Me.hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE)
     Me.BorderStyle = 0
-    Me.WindowState = 2
+    Me.WindowState = 0
     Me.SetFocus
 End Sub
