@@ -4,10 +4,10 @@ Begin VB.Form formMain
    BackColor       =   &H00333333&
    BorderStyle     =   0  'None
    Caption         =   "formMain"
-   ClientHeight    =   6405
+   ClientHeight    =   5940
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   5925
+   ClientWidth     =   5535
    FillColor       =   &H00CCCCCC&
    BeginProperty Font 
       Name            =   "Tahoma"
@@ -21,14 +21,14 @@ Begin VB.Form formMain
    ForeColor       =   &H00CCCCCC&
    Icon            =   "formMain.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6405
-   ScaleWidth      =   5925
+   ScaleHeight     =   5940
+   ScaleWidth      =   5535
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Timer timer 
       Interval        =   1000
-      Left            =   120
-      Top             =   5640
+      Left            =   360
+      Top             =   5280
    End
    Begin VB.Frame frameDeveloper 
       Appearance      =   0  'Flat
@@ -38,7 +38,7 @@ Begin VB.Form formMain
       Height          =   855
       Left            =   360
       TabIndex        =   14
-      Top             =   4440
+      Top             =   4200
       Width           =   4455
       Begin VB.Label labelDevUrl 
          Alignment       =   2  'Center
@@ -71,7 +71,7 @@ Begin VB.Form formMain
       Height          =   615
       Left            =   360
       TabIndex        =   12
-      Top             =   3720
+      Top             =   3480
       Width           =   4455
       Begin VB.Label labelStatus 
          Alignment       =   2  'Center
@@ -85,28 +85,32 @@ Begin VB.Form formMain
          Width           =   4215
       End
    End
-   Begin VB.Frame frameSetPanel 
+   Begin VB.Frame frameSettings 
       Appearance      =   0  'Flat
       BackColor       =   &H00333333&
-      Caption         =   "Panel"
+      Caption         =   "Settings"
+      Enabled         =   0   'False
       ForeColor       =   &H00CCCCCC&
-      Height          =   3375
+      Height          =   3135
       Left            =   360
       TabIndex        =   0
       Top             =   240
+      Visible         =   0   'False
       Width           =   4455
       Begin VB.CheckBox checkStartup 
          Appearance      =   0  'Flat
          BackColor       =   &H00333333&
          Caption         =   "Startup"
+         Enabled         =   0   'False
          ForeColor       =   &H00CCCCCC&
          Height          =   300
          Left            =   240
          TabIndex        =   5
-         Top             =   2520
+         Top             =   2280
+         Visible         =   0   'False
          Width           =   1575
       End
-      Begin VB.TextBox inputSetPasswordConfirm 
+      Begin VB.TextBox inputNewPasswordConfirm 
          Appearance      =   0  'Flat
          BackColor       =   &H00292929&
          ForeColor       =   &H00FFFFFF&
@@ -115,10 +119,10 @@ Begin VB.Form formMain
          Left            =   240
          PasswordChar    =   "•"
          TabIndex        =   3
-         Top             =   1920
+         Top             =   1680
          Width           =   3975
       End
-      Begin VB.TextBox inputSetPassword 
+      Begin VB.TextBox inputNewPassword 
          Appearance      =   0  'Flat
          BackColor       =   &H00292929&
          ForeColor       =   &H00FFFFFF&
@@ -127,63 +131,76 @@ Begin VB.Form formMain
          Left            =   240
          PasswordChar    =   "•"
          TabIndex        =   1
-         Top             =   960
+         Top             =   840
          Width           =   3975
       End
-      Begin VB.Label buttonExit 
+      Begin VB.Label buttonUninstall 
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
          BackColor       =   &H00292929&
          BorderStyle     =   1  'Fixed Single
-         Caption         =   "Exit"
+         Caption         =   "Uninstall"
+         ForeColor       =   &H008080FF&
+         Height          =   300
+         Left            =   240
+         TabIndex        =   18
+         Top             =   2640
+         Visible         =   0   'False
+         Width           =   1575
+      End
+      Begin VB.Label buttonCancel 
+         Alignment       =   2  'Center
+         Appearance      =   0  'Flat
+         BackColor       =   &H00292929&
+         BorderStyle     =   1  'Fixed Single
+         Caption         =   "Cancel"
          ForeColor       =   &H00CCCCCC&
          Height          =   300
          Left            =   1920
          TabIndex        =   7
-         Top             =   2880
+         Top             =   2640
          Width           =   2295
       End
-      Begin VB.Label buttonLock 
+      Begin VB.Label buttonSave 
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
          BackColor       =   &H00292929&
          BorderStyle     =   1  'Fixed Single
-         Caption         =   "Lock"
+         Caption         =   "Save"
          ForeColor       =   &H00CCCCCC&
          Height          =   300
          Left            =   1920
          TabIndex        =   6
-         Top             =   2520
+         Top             =   2280
          Width           =   2295
       End
-      Begin VB.Label labelSetPasswordConfirm 
+      Begin VB.Label labelNewPasswordConfirm 
          BackColor       =   &H00333333&
-         Caption         =   "Confirm Password"
+         Caption         =   "Confirm New Password"
          ForeColor       =   &H00CCCCCC&
          Height          =   300
          Left            =   360
          TabIndex        =   4
-         Top             =   1560
+         Top             =   1320
          Width           =   3855
       End
-      Begin VB.Label labelSetPassword 
+      Begin VB.Label labelNewPassword 
          BackColor       =   &H00333333&
-         Caption         =   "Password"
+         Caption         =   "New Password"
          ForeColor       =   &H00CCCCCC&
          Height          =   300
          Left            =   360
          TabIndex        =   2
-         Top             =   600
+         Top             =   480
          Width           =   3855
       End
    End
-   Begin VB.Frame frameEnterPanel 
+   Begin VB.Frame frameEnter 
       Appearance      =   0  'Flat
       BackColor       =   &H00333333&
-      Caption         =   "Panel"
       Enabled         =   0   'False
       ForeColor       =   &H00CCCCCC&
-      Height          =   3375
+      Height          =   3135
       Left            =   360
       TabIndex        =   8
       Top             =   240
@@ -198,8 +215,21 @@ Begin VB.Form formMain
          Left            =   240
          PasswordChar    =   "•"
          TabIndex        =   9
-         Top             =   960
+         Top             =   840
          Width           =   3975
+      End
+      Begin VB.Label buttonSettings 
+         Alignment       =   2  'Center
+         Appearance      =   0  'Flat
+         BackColor       =   &H00292929&
+         BorderStyle     =   1  'Fixed Single
+         Caption         =   "Settings"
+         ForeColor       =   &H00CCCCCC&
+         Height          =   300
+         Left            =   1920
+         TabIndex        =   17
+         Top             =   2640
+         Width           =   2295
       End
       Begin VB.Label labelEnterPassword 
          BackColor       =   &H00333333&
@@ -208,7 +238,7 @@ Begin VB.Form formMain
          Height          =   300
          Left            =   360
          TabIndex        =   11
-         Top             =   600
+         Top             =   480
          Width           =   3855
       End
       Begin VB.Label buttonUnlock 
@@ -221,7 +251,7 @@ Begin VB.Form formMain
          Height          =   300
          Left            =   1920
          TabIndex        =   10
-         Top             =   2520
+         Top             =   2280
          Width           =   2295
       End
    End
@@ -241,6 +271,7 @@ Private Declare Function GetSystemMetrics Lib "user32" (ByVal nIndex As Long) As
 ' Define Constants
 Private Const REG_KEY As String = "Software\Microsoft\Windows\CurrentVersion\Run"
 Private Const APP_NAME As String = "DesktopLocker"
+Private Const CFG_FILE As String = "DesktopLocker.mrt"
 
 Const HWND_TOPMOST = -1
 Const SWP_NOSIZE = &H1
@@ -258,21 +289,38 @@ Private Sub ChangeStatus(msg As String)
     labelStatus.Caption = Trim(msg)
 End Sub
 
-Private Sub VisiblePanel(panelId As Integer)
-    If panelId = 1 Then
-        frameSetPanel.Enabled = True
-        frameSetPanel.Visible = True
-        frameEnterPanel.Enabled = False
-        frameEnterPanel.Visible = False
+Private Sub FrameVisible(frameId As Integer)
+    If frameId = 1 Then
+        inputNewPassword.Text = ""
+        inputNewPasswordConfirm.Text = ""
+        
+        ' Load Startup
+        Dim startupPath As String
+        startupPath = GetStartupPath()
+        If startupPath <> "" Then
+            checkStartup.Value = vbChecked
+            buttonUninstall.Visible = True
+        Else
+            checkStartup.Value = vbUnchecked
+            buttonUninstall.Visible = False
+        End If
+        
+        frameSettings.Enabled = True
+        frameSettings.Visible = True
+        frameEnter.Enabled = False
+        frameEnter.Visible = False
     Else
-        frameSetPanel.Enabled = False
-        frameSetPanel.Visible = False
-        frameEnterPanel.Enabled = True
-        frameEnterPanel.Visible = True
+        inputEnterPassword.Text = ""
+        
+        frameSettings.Enabled = False
+        frameSettings.Visible = False
+        frameEnter.Enabled = True
+        frameEnter.Visible = True
     End If
 End Sub
 
 Private Sub SetFullScreenAcrossMonitors()
+    On Error Resume Next
     Dim x As Long, y As Long, width As Long, height As Long
     
     x = GetSystemMetrics(SM_XVIRTUALSCREEN)
@@ -284,56 +332,88 @@ Private Sub SetFullScreenAcrossMonitors()
 End Sub
 
 Private Sub AddToStartup()
+    On Error Resume Next
     Dim reg As Object
     Dim appPath As String
     appPath = App.path & "\" & App.EXEName & ".exe"
-    
     Set reg = CreateObject("WScript.Shell")
     reg.RegWrite "HKEY_CURRENT_USER\" & REG_KEY & "\" & APP_NAME, appPath, "REG_SZ"
     Set reg = Nothing
 End Sub
 
 Private Sub RemoveFromStartup()
+    On Error Resume Next
     Dim reg As Object
     Set reg = CreateObject("WScript.Shell")
-    On Error Resume Next
     reg.RegDelete "HKEY_CURRENT_USER\" & REG_KEY & "\" & APP_NAME
     Set reg = Nothing
 End Sub
 
 Private Function GetStartupPath() As String
+    On Error Resume Next
     Dim reg As Object
     Dim path As String
-    
     Set reg = CreateObject("WScript.Shell")
-    On Error Resume Next
     path = reg.RegRead("HKEY_CURRENT_USER\" & REG_KEY & "\" & APP_NAME)
     Set reg = Nothing
     GetStartupPath = path
 End Function
 
-Private Sub buttonExit_Click()
-    End
-End Sub
-
-Private Sub buttonLock_Click()
-    If inputSetPassword.Text = "" Or inputSetPasswordConfirm.Text = "" Or inputSetPassword.Text <> inputSetPasswordConfirm.Text Then
-        ChangeStatus "Unlocked - Invalid Password!"
-        inputSetPassword.Text = ""
-        inputSetPasswordConfirm.Text = ""
+Private Sub buttonCancel_Click()
+    If currentPassword <> "" Then
+        FrameVisible 2
+        ChangeStatus "Locked"
         Exit Sub
     End If
     
-    currentPassword = inputSetPassword.Text
+    Call buttonUninstall_Click
+End Sub
+
+Private Sub buttonSave_Click()
+    If inputNewPassword.Text = "" Or inputNewPasswordConfirm.Text = "" Or inputNewPassword.Text <> inputNewPasswordConfirm.Text Then
+        ChangeStatus "Unlocked - Invalid Password!"
+        inputNewPassword.Text = ""
+        inputNewPasswordConfirm.Text = ""
+        Exit Sub
+    End If
     
-    Open App.path & "\DesktopLocker.mrt" For Output As #1
+    currentPassword = inputNewPassword.Text
+    inputNewPassword.Text = ""
+    inputNewPasswordConfirm.Text = ""
+    
+    Open App.path & "\" & CFG_FILE For Output As #1
         Print #1, "Desktop Locker Password: " & currentPassword & " Developer: Mehdi-RaTo (https://github.com/Mehdi-RaTo)"
     Close #1
     
-    inputSetPassword.Text = ""
-    inputSetPasswordConfirm.Text = ""
-    VisiblePanel 2
+    If checkStartup.Value <> vbChecked Then
+        AddToStartup
+    End If
+    
+    FrameVisible 2
     ChangeStatus "Locked"
+End Sub
+
+Private Sub buttonSettings_Click()
+    If inputEnterPassword.Text <> currentPassword Then
+        ChangeStatus "Locked - Wrong Password!"
+        inputEnterPassword.Text = ""
+        Exit Sub
+    End If
+    
+    FrameVisible 1
+    ChangeStatus "Unlocked"
+End Sub
+
+Private Sub buttonUninstall_Click()
+    On Error Resume Next
+    
+    Kill App.path & "\" & CFG_FILE
+
+    If checkStartup.Value = vbChecked Then
+        RemoveFromStartup
+    End If
+    
+    End
 End Sub
 
 Private Sub buttonUnlock_Click()
@@ -343,21 +423,7 @@ Private Sub buttonUnlock_Click()
         Exit Sub
     End If
     
-    Open App.path & "\DesktopLocker.mrt" For Output As #1
-        Print #1, "Desktop Locker Password:  Developer: Mehdi-RaTo (https://github.com/Mehdi-RaTo)"
-    Close #1
-    
-    inputEnterPassword.Text = ""
-    VisiblePanel 1
-    ChangeStatus "Unlocked"
-End Sub
-
-Private Sub checkStartup_Click()
-    If checkStartup.Value = vbChecked Then
-        AddToStartup
-    Else
-        RemoveFromStartup
-    End If
+    End
 End Sub
 
 Private Sub Form_Load()
@@ -367,31 +433,21 @@ Private Sub Form_Load()
     
     Dim fileContent As String
     Dim arrFileContent() As String
-    
-    Open App.path & "\DesktopLocker.mrt" For Input As #1
+    Open App.path & "\" & CFG_FILE For Input As #1
         Line Input #1, fileContent
     Close #1
-    
     arrFileContent = Split(fileContent, "Desktop Locker Password: ")
-    
     If UBound(arrFileContent) > 0 Then
         currentPassword = Replace(arrFileContent(1), " Developer: Mehdi-RaTo (https://github.com/Mehdi-RaTo)", "")
         If currentPassword <> "" Then
-            inputSetPassword.Text = currentPassword
-            inputSetPasswordConfirm.Text = currentPassword
-            Call buttonLock_Click
+            FrameVisible 2
+            ChangeStatus "Locked"
+            Exit Sub
         End If
     End If
     
-    ' Load Startup
-    Dim startupPath As String
-    startupPath = GetStartupPath()
-    
-    If startupPath <> "" Then
-        checkStartup.Value = vbChecked
-    Else
-        checkStartup.Value = vbUnchecked
-    End If
+    FrameVisible 1
+    ChangeStatus "Unlocked"
 End Sub
 
 Private Sub timer_Timer()
