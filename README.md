@@ -11,7 +11,6 @@
 
 ## 📥 Download
 
-🔗 Get the latest version from the link below:
 [Download Latest Version](https://github.com/Mehdi-RaTo/DesktopLocker/releases/latest)
 
 ## 🎥 Demo
